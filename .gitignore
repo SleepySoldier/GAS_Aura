@@ -7,7 +7,9 @@ Build
 
 
 .vscode
+.vsconfig
 .vs
+.idea
 *VC.db
 *.opendb
 *.opensdf
