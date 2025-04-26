@@ -14,6 +14,11 @@ AAuraCharacterBase::AAuraCharacterBase()
 	GetMesh()->SetWorldLocationAndRotation(FVector(0.f,0.f, -90.f), FRotator(0.f,-90.f, 0.f));
 }
 
+UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AAuraCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
