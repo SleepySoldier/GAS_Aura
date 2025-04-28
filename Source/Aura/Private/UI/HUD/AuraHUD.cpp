@@ -14,6 +14,7 @@ UAuraOverlayWidgetController* AAuraHUD::GetAuraOverlayWidgetController(
 	{
 		OverlayWidgetController = NewObject<UAuraOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WidgetControllerParams);
+		OverlayWidgetController->BindCallbacksToDependencies();
 
 		return OverlayWidgetController;
 	}
@@ -22,6 +23,7 @@ UAuraOverlayWidgetController* AAuraHUD::GetAuraOverlayWidgetController(
 
 void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
+	
 	checkf(OverlayWidgetClass, TEXT("Overlay widget class uninitialized, please fill out HUD_Aura"))
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay widget controller class uninitialized, please fill out HUD_Aura."))
 	
