@@ -7,6 +7,7 @@
 #include "AbilitySystemComponent.h"
 
 
+
 AAuraEffectActor::AAuraEffectActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -29,7 +30,8 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
-	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+
 }
 
 void AAuraEffectActor::OnOverlap(AActor* TargetActor)
@@ -42,6 +44,10 @@ void AAuraEffectActor::OnOverlap(AActor* TargetActor)
 	{
 		ApplyEffectToTarget(TargetActor, DurationGameplayEffectClass);
 	}
+	if (InfiniteEffectApplicationPolicy == ApplyOnOverlap)
+	{
+		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffectClass);
+	}
 }
 
 void AAuraEffectActor::EndOverlap(AActor* TargetActor)
@@ -53,5 +59,17 @@ void AAuraEffectActor::EndOverlap(AActor* TargetActor)
 	if (DurationEffectApplicationPolicy == ApplyOnEndOverlap)
 	{
 		ApplyEffectToTarget(TargetActor, DurationGameplayEffectClass);
+	}
+	if (InfiniteEffectApplicationPolicy == ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(TargetActor, InfiniteGameplayEffectClass);
+	}
+	if (InfiniteEffectApplicationPolicy == RemoveOnEndOverlap)
+	{
+		UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+		if (!IsValid(TargetASC)) return;
+
+		TargetASC->RemoveActiveGameplayEffectBySourceEffect(InfiniteGameplayEffectClass, TargetASC, 1);
+
 	}
 }
