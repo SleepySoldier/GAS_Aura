@@ -44,10 +44,10 @@ protected:
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
 	UFUNCTION(BlueprintCallable)
-	void OnOverlap(AActor* TargetActor);
+	void ApplyEffectOnOverlap(AActor* TargetActor);
 
 	UFUNCTION(BlueprintCallable)
-	void EndOverlap(AActor* TargetActor);
+	void ApplyEffectEndOverlap(AActor* TargetActor);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	bool bDestroyOnEffectRemoval = false;
@@ -74,5 +74,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TEnumAsByte< EEffectRemovalPolicy > InfiniteEffectRemovalPolicy = RemoveOnEndOverlap;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+
+	float ActorLevel = 1.f;
 };
