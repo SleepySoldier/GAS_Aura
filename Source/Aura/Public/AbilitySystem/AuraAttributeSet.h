@@ -8,6 +8,7 @@
 #include "AuraAttributeSet.generated.h"
 
 
+
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
@@ -52,6 +53,11 @@ struct FEffectProperties
 
 };
 
+//typedef is specific to the FGameplayAttribute() signature, but TstaticfuncPtr is Generic to any signature chosen.
+//Function poiner capable or storing the address of a function of any function signature we choose.
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
+
 /**
  * 
  */
@@ -69,6 +75,12 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 	
+	//section 95 Map gameplayTags to Function pointers with and FGameplayAttribute() signature.
+	// (*)() raw c++ syntax for a function pointer.
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+
+
+
 	/*
 	~ Vital Attributes
 	*/
