@@ -28,8 +28,8 @@ void FAuraGameplayTags::InititalizeNativeGameplayTags()
 		FName("Attributes.Primary.Intelligence"), 
 		FString("Increase damage of magical attacks, also increase MaxMana"));
 
-	GameplayTags.Attributes_Primary_Resilliance = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Attributes.Primary.Resilliance"), 
+	GameplayTags.Attributes_Primary_Resilience = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Primary.Resilience"), 
 		FString("Improve damage resistance. Increase Armor and Armor Penetration."));
 
 	GameplayTags.Attributes_Primary_Vigor = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -77,5 +77,32 @@ FString("Rate at which Health regenerates over time."));
 	GameplayTags.Attributes_Secondary_MaxMana = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Attributes.Secondary.MaxMana"), 
 		FString("Increase max available Mana."));
+
+	/* Input Tags */
+	
+	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.RMB"), 
+	FString("Input Right Mouse Button."));
+
+	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.LMB"), 
+	FString("Input Left Mouse Button."));
+
+	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.1"), 
+	FString("Input 1 key."));
+
+	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.2"), 
+	FString("Input 2 key."));
+
+	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.3"), 
+	FString("Input 3 key."));
+
+	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Input.4"), 
+	FString("Input 4 key."));
+
 
 }
