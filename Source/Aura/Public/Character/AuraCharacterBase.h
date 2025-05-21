@@ -34,8 +34,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	FName WeaponTipSocketName;
-
+	
 	virtual FVector GetCombatSocketLocation() override;
+
 
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -59,9 +60,12 @@ protected:
 
 	void AddCharacterAbilities();
 
+
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
 
 };
