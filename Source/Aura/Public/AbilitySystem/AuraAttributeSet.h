@@ -92,7 +92,12 @@ public:
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Mana);
 	
-
+	/*
+	~ Meta Attributes
+	*/
+	UPROPERTY(BlueprintReadOnly, Category = "Vital Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
 	
 	/*
 	~ Primary Attributes

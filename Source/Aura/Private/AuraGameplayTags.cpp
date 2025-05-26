@@ -104,5 +104,12 @@ FString("Rate at which Health regenerates over time."));
 		FName("Input.4"), 
 	FString("Input 4 key."));
 
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("Damage"), 
+FString("Damage"));
+
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+FName("Effects.HitReact"), 
+FString("Tag granted when reacting to a hit/ damage"));
 
 }

@@ -7,6 +7,7 @@
 #include "CharacterClassInfo.generated.h"
 
 
+class UGameplayAbility;
 class UGameplayEffect;
 
 UENUM(BlueprintType)
@@ -45,6 +46,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "CommonClassDefaults")
 	TSubclassOf<UGameplayEffect> VitalAttributes;
+
+	UPROPERTY(EditDefaultsOnly, Category = "CommonClassDefaults")
+	TArray<TSubclassOf<UGameplayAbility>> CommonAbilities;
 
 	// Function to return the Map info when given A CharacterClass enum
 	FCharacterClassDefaultInfo GetClassDefaultInfo(ECharacterClass CharacterClass);
