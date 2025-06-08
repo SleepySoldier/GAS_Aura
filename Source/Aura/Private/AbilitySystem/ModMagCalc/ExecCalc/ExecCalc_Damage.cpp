@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/ModMagCalc/ExecCalc/ExecCalc_Damage.h"
 #include "AbilitySystemComponent.h"
+#include "AuraAbilityTypes.h"
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AbilitySystem/AuraAttributeSet.h"
@@ -67,7 +68,12 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	EvaluationParams.TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
 
 // Get damage set by caller magnitude.
-	float Damage = Spec.GetSetByCallerMagnitude(FAuraGameplayTags::Get().Damage);
+	float Damage = 0.f;
+	for (FGameplayTag DamageTypeTag : FAuraGameplayTags::Get().DamageTypes)
+	{
+		const float DamageTypeValue = Spec.GetSetByCallerMagnitude(DamageTypeTag);
+		Damage += DamageTypeValue;
+	}
 
 	//Capture block chance on Target, and determine if there was a succesful block.
 
@@ -77,6 +83,10 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	TargetBlockChance = FMath::Max<float>(TargetBlockChance, 0.f);
 	
 	const bool bBlocked = FMath::RandRange(1, 100 ) < TargetBlockChance;
+
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+	UAuraAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlocked);
+	
 	//if Block, halve the damage.
 	Damage = bBlocked ? Damage * .5 : Damage;
 
@@ -119,6 +129,9 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalHitResistance * CriticalHitResistCoX;
 	const bool bCriticalHit = FMath::RandRange(1, 100 ) < EffectiveCriticalHitChance;
+
+	UAuraAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bCriticalHit);
+	 
 	// Double damage plus a bonus if a critical hit.
 	Damage = bCriticalHit ? Damage * 2 + SourceCriticalHitDamage : Damage;
 	
