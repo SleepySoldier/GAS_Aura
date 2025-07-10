@@ -7,6 +7,7 @@
 #include "AuraEffectActor.generated.h"
 
 
+
 class UGameplayEffect;
 class UAbilitySystemComponent;
 
@@ -48,7 +49,10 @@ protected:
 	void ApplyEffectEndOverlap(AActor* TargetActor);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	bool bDestroyOnEffectRemoval = false;
+	bool bDestroyOnEffectApplication = false;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	bool bApplyEffectToEnemy = false;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect>InstantGameplayEffectClass;
@@ -73,6 +77,7 @@ protected:
 	TEnumAsByte< EEffectRemovalPolicy > InfiniteEffectRemovalPolicy = RemoveOnEndOverlap;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-
 	float ActorLevel = 1.f;
+
+
 };
