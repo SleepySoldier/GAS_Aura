@@ -32,7 +32,7 @@ public:
 	//can use in BP and c++ with BPNativeEvent with "_Implementation" 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetHitReactMontage();
-
+	
 	virtual void Die() = 0;
 
 };

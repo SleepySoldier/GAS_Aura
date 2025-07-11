@@ -160,4 +160,10 @@ FString("Resistance to Physical damage"));
 FName("Effects.HitReact"), 
 FString("Tag granted when reacting to a hit/ damage"));
 
+	/* Ability Tags */
+
+	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(
+FName("Abilities.Attack"), 
+FString("Tag granted when Actor is Attacking"));
+
 }

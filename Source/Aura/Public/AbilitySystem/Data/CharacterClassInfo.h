@@ -25,6 +25,10 @@ struct FCharacterClassDefaultInfo
 	//UPROPERTY to be able to set it from within the asset per class
 	UPROPERTY(EditDefaultsOnly, Category = "ClassDefaults")
 	TSubclassOf<UGameplayEffect> PrimaryAttributes;
+
+	UPROPERTY(EditDefaultsOnly, Category = "ClassDefaults")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
 	
 };
 

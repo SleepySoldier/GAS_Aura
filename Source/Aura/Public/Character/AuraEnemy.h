@@ -25,6 +25,7 @@ public:
 	AAuraEnemy();
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
+	
 
 	virtual void PossessedBy(AController* NewController) override;
 	
@@ -76,6 +77,10 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AAuraAIController> AuraAIController;
 
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Defaults")
+	TObjectPtr<UAnimMontage> AttackMontage;
 	
 
 
