@@ -164,6 +164,6 @@ FString("Tag granted when reacting to a hit/ damage"));
 
 	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(
 FName("Abilities.Attack"), 
-FString("Tag granted when Actor is Attacking"));
+FString("Attack Ability Tag"));
 
 }
