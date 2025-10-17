@@ -25,13 +25,21 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const {return AttributeSet;};
 
+	/** Combat Interface **/
+	
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
 	virtual void Die() override;
+
+	/** End Combat Interface **/
+	
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
-	
+
 protected:
+
+	bool bDead = false;
 	virtual void BeginPlay() override;
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<USkeletalMeshComponent> Weapon;
