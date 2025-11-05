@@ -30,24 +30,40 @@ public:
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual bool IsDead_Implementation() const override;
 	virtual AActor* GetAvatar_Implementation() override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual void Die() override;
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
 
 	/** End Combat Interface **/
 	
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TArray <FTaggedMontage> AttackMontages;
+
 protected:
 
 	bool bDead = false;
+	
 	virtual void BeginPlay() override;
-	UPROPERTY(EditAnywhere, Category = Combat)
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactMontage;
+	
 	UPROPERTY(EditAnywhere, Category = Combat)
 	FName WeaponTipSocketName;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName LeftHandSocketName = "LeftHandSocket";
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName RightHandSocketName = "RightHandSocket";
 	
-	virtual FVector GetCombatSocketLocation_Implementation() override;
+	
+
 
 
 	UPROPERTY()
@@ -88,6 +104,5 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
-	UPROPERTY(EditAnywhere, Category = "Defaults")
-	TObjectPtr<UAnimMontage> HitReactMontage;
+
 };
