@@ -8,6 +8,7 @@
 #include "Interaction/CombatInterface.h"
 #include "AuraCharacterBase.generated.h"
 
+class UNiagaraSystem;
 class UGameplayAbility;
 class UAttributeSet;
 class UAbilitySystemComponent;
@@ -33,7 +34,8 @@ public:
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual void Die() override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
-
+	virtual UNiagaraSystem* GetBloodEffect_Implementation() override;
+	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
 	/** End Combat Interface **/
 	
 	UFUNCTION(NetMulticast, Reliable)
@@ -61,10 +63,8 @@ protected:
 	FName LeftHandSocketName = "LeftHandSocket";
 	UPROPERTY(EditAnywhere, Category = Combat)
 	FName RightHandSocketName = "RightHandSocket";
-	
-	
-
-
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName TailSocketName = FName("TailSocket");
 
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -99,6 +99,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
+	UNiagaraSystem* BloodEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
+	USoundBase* DeathSound;
+	
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
