@@ -160,11 +160,16 @@ FString("Resistance to Physical damage"));
 FName("Effects.HitReact"), 
 FString("Tag granted when reacting to a hit/ damage"));
 
-	/* Combat Socket */
+	/* Abilities */
 
 	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(
 FName("Abilities.Attack"), 
 FString("Attack Ability Tag"));
+	GameplayTags.Abilities_Summon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+FName("Abilities.Summon"), 
+FString("Summon Ability Tag"));
+
+	/* Combat Socket */
 
 	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
 FName("Combat.Socket.Weapon"), 
