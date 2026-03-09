@@ -147,6 +147,10 @@ FString("Resistance to Arcane damage"));
 FName("Attributes.Resistances.Physical"), 
 FString("Resistance to Physical damage"));
 
+	GameplayTags.Attributes_Meta_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
+FName("Attributes.Meta.IncomingXP"), 
+FString("Incoming xp"));
+
 	/* Map of damage types to resistances*/
 
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Fire, GameplayTags.Attributes_Resistances_Fire);
